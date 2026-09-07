@@ -238,7 +238,7 @@ asyncio.run(main())
 uv run pytest -q
 ```
 
-测试覆盖 Scope、Researcher、Supervisor、评审回流、Writer、RAG 入库和检索、MCP 文件读取、CLI 与完整应用装配
+测试覆盖 Scope、Researcher、Supervisor、评审回流、Writer、RAG 入库和检索、MCP 文件读取、CLI 与完整应用装配。
 
 ## 当前限制
 
