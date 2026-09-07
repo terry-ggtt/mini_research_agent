@@ -238,7 +238,7 @@ asyncio.run(main())
 uv run pytest -q
 ```
 
-测试覆盖 Scope、Researcher、Supervisor、评审回流、Writer、RAG 入库和检索、MCP 文件读取、CLI 与完整应用装配
+测试覆盖 Scope、Researcher、Supervisor、评审回流、Writer、RAG 入库和检索、MCP 文件读取、CLI 与完整应用装配。
 
 ## 当前限制
 
@@ -248,6 +248,3 @@ uv run pytest -q
 - 本地知识库默认只索引 Markdown 和纯文本文件。
 - 本地文件正文必须能够按 UTF-8 读取。
 - 模型和搜索调用需要有效的 DeepSeek 与 Tavily API Key。
-#   m i n i _ r e s e a r c h _ a g e n t 
- 
- 
