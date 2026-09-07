@@ -248,6 +248,3 @@ uv run pytest -q
 - 本地知识库默认只索引 Markdown 和纯文本文件。
 - 本地文件正文必须能够按 UTF-8 读取。
 - 模型和搜索调用需要有效的 DeepSeek 与 Tavily API Key。
-#   m i n i _ r e s e a r c h _ a g e n t 
- 
- 
