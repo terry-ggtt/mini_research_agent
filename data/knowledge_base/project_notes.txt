@@ -1,0 +1,5 @@
+Mini Research Agent combines three evidence channels.
+
+Web search is used for current public information. RAG is used for semantic discovery across indexed internal documents. MCP tools are used for exact access to files and external systems.
+
+The final report must distinguish web citations, knowledge-base citations, and MCP file citations.

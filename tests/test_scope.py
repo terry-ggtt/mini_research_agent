@@ -2,7 +2,7 @@ import pytest
 from langchain_core.messages import HumanMessage
 from pydantic import ValidationError
 
-from mini_research_agent.schemas import (
+from mini_research_agent.scope_schemas import (
     ClarificationDecision,
     ResearchBriefOutput,
 )

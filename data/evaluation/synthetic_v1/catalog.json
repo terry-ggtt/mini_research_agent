@@ -1,0 +1,239 @@
+{
+  "dataset": "synthetic_v1",
+  "synthetic": true,
+  "document_count": 58,
+  "documents": [
+    {
+      "path": "synthetic_v1/projects/01_霁月_需求.md",
+      "characters": 1408
+    },
+    {
+      "path": "synthetic_v1/projects/01_霁月_验收.txt",
+      "characters": 887
+    },
+    {
+      "path": "synthetic_v1/projects/02_青岚_需求.md",
+      "characters": 1411
+    },
+    {
+      "path": "synthetic_v1/projects/02_青岚_验收.txt",
+      "characters": 881
+    },
+    {
+      "path": "synthetic_v1/projects/03_星桥_需求.md",
+      "characters": 1410
+    },
+    {
+      "path": "synthetic_v1/projects/03_星桥_验收.txt",
+      "characters": 880
+    },
+    {
+      "path": "synthetic_v1/projects/04_远帆_需求.md",
+      "characters": 1406
+    },
+    {
+      "path": "synthetic_v1/projects/04_远帆_验收.txt",
+      "characters": 876
+    },
+    {
+      "path": "synthetic_v1/projects/05_栖云_需求.md",
+      "characters": 1405
+    },
+    {
+      "path": "synthetic_v1/projects/05_栖云_验收.txt",
+      "characters": 884
+    },
+    {
+      "path": "synthetic_v1/projects/06_北辰_需求.md",
+      "characters": 1409
+    },
+    {
+      "path": "synthetic_v1/projects/06_北辰_验收.txt",
+      "characters": 880
+    },
+    {
+      "path": "synthetic_v1/projects/07_澄海_需求.md",
+      "characters": 1405
+    },
+    {
+      "path": "synthetic_v1/projects/07_澄海_验收.txt",
+      "characters": 874
+    },
+    {
+      "path": "synthetic_v1/projects/08_松涛_需求.md",
+      "characters": 1401
+    },
+    {
+      "path": "synthetic_v1/projects/08_松涛_验收.txt",
+      "characters": 871
+    },
+    {
+      "path": "synthetic_v1/projects/09_流萤_需求.md",
+      "characters": 1407
+    },
+    {
+      "path": "synthetic_v1/projects/09_流萤_验收.txt",
+      "characters": 887
+    },
+    {
+      "path": "synthetic_v1/projects/10_云杉_需求.md",
+      "characters": 1408
+    },
+    {
+      "path": "synthetic_v1/projects/10_云杉_验收.txt",
+      "characters": 878
+    },
+    {
+      "path": "synthetic_v1/projects/11_白露_需求.md",
+      "characters": 1413
+    },
+    {
+      "path": "synthetic_v1/projects/11_白露_验收.txt",
+      "characters": 883
+    },
+    {
+      "path": "synthetic_v1/projects/12_赤枫_需求.md",
+      "characters": 1395
+    },
+    {
+      "path": "synthetic_v1/projects/12_赤枫_验收.txt",
+      "characters": 865
+    },
+    {
+      "path": "synthetic_v1/projects/13_鸣沙_需求.md",
+      "characters": 1404
+    },
+    {
+      "path": "synthetic_v1/projects/13_鸣沙_验收.txt",
+      "characters": 884
+    },
+    {
+      "path": "synthetic_v1/projects/14_映雪_需求.md",
+      "characters": 1411
+    },
+    {
+      "path": "synthetic_v1/projects/14_映雪_验收.txt",
+      "characters": 881
+    },
+    {
+      "path": "synthetic_v1/projects/15_雨燕_需求.md",
+      "characters": 1406
+    },
+    {
+      "path": "synthetic_v1/projects/15_雨燕_验收.txt",
+      "characters": 876
+    },
+    {
+      "path": "synthetic_v1/projects/16_碧潭_需求.md",
+      "characters": 1408
+    },
+    {
+      "path": "synthetic_v1/projects/16_碧潭_验收.txt",
+      "characters": 878
+    },
+    {
+      "path": "synthetic_v1/projects/17_晨曦_需求.md",
+      "characters": 1406
+    },
+    {
+      "path": "synthetic_v1/projects/17_晨曦_验收.txt",
+      "characters": 886
+    },
+    {
+      "path": "synthetic_v1/projects/18_听泉_需求.md",
+      "characters": 1403
+    },
+    {
+      "path": "synthetic_v1/projects/18_听泉_验收.txt",
+      "characters": 873
+    },
+    {
+      "path": "synthetic_v1/projects/19_皓石_需求.md",
+      "characters": 1411
+    },
+    {
+      "path": "synthetic_v1/projects/19_皓石_验收.txt",
+      "characters": 881
+    },
+    {
+      "path": "synthetic_v1/projects/20_芦汀_需求.md",
+      "characters": 1404
+    },
+    {
+      "path": "synthetic_v1/projects/20_芦汀_验收.txt",
+      "characters": 874
+    },
+    {
+      "path": "synthetic_v1/projects/21_雾凇_需求.md",
+      "characters": 1410
+    },
+    {
+      "path": "synthetic_v1/projects/21_雾凇_验收.txt",
+      "characters": 890
+    },
+    {
+      "path": "synthetic_v1/projects/22_橙光_需求.md",
+      "characters": 1407
+    },
+    {
+      "path": "synthetic_v1/projects/22_橙光_验收.txt",
+      "characters": 877
+    },
+    {
+      "path": "synthetic_v1/projects/23_莲舟_需求.md",
+      "characters": 1404
+    },
+    {
+      "path": "synthetic_v1/projects/23_莲舟_验收.txt",
+      "characters": 874
+    },
+    {
+      "path": "synthetic_v1/projects/24_墨池_需求.md",
+      "characters": 1411
+    },
+    {
+      "path": "synthetic_v1/projects/24_墨池_验收.txt",
+      "characters": 880
+    },
+    {
+      "path": "synthetic_v1/policies/退款制度_v1_历史.md",
+      "characters": 372
+    },
+    {
+      "path": "synthetic_v1/policies/退款制度_v2_现行.md",
+      "characters": 420
+    },
+    {
+      "path": "synthetic_v1/policies/退款制度_v3_草案.md",
+      "characters": 363
+    },
+    {
+      "path": "synthetic_v1/policies/服务等级.md",
+      "characters": 376
+    },
+    {
+      "path": "synthetic_v1/policies/数据保留.md",
+      "characters": 376
+    },
+    {
+      "path": "synthetic_v1/policies/索引运维.md",
+      "characters": 442
+    },
+    {
+      "path": "synthetic_v1/policies/引用规范.md",
+      "characters": 404
+    },
+    {
+      "path": "synthetic_v1/policies/安全读取.md",
+      "characters": 423
+    },
+    {
+      "path": "synthetic_v1/long_docs/大型研究运行手册.md",
+      "characters": 93227
+    },
+    {
+      "path": "synthetic_v1/long_docs/演练事件流水.txt",
+      "characters": 88072
+    }
+  ]
+}

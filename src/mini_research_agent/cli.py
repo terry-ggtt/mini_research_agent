@@ -1,42 +1,60 @@
+import asyncio
+
 from langchain_core.messages import HumanMessage
+from langgraph.checkpoint.memory import InMemorySaver
 
-from mini_research_agent.scope_graph import create_scope_graph
+from mini_research_agent.bootstrap import create_application
 
+async def run_cli() -> None:
+    checkpointer = InMemorySaver()
+    runtime = await create_application(
+        checkpointer=checkpointer,
+    )
+    full_agent = runtime.graph
 
-def main() -> None:
-    """Run the Scope Graph in the terminal."""
-
-    graph = create_scope_graph()
-    messages = []
+    config = {
+        "configurable": {
+            "thread_id": "research-session-1",
+        }
+    }
 
     while True:
-        if not messages:
-            user_text = input("研究需求：").strip()
-        else:
-            user_text = input("补充信息：").strip()
+        user_text = input("研究需求或补充信息：").strip()
 
         if not user_text:
             print("未提供有效内容，程序结束。")
             return
 
-        messages.append(HumanMessage(content=user_text))
+        result = await full_agent.ainvoke(
+            {
+                "messages": [
+                    HumanMessage(content=user_text),
+                ]
+            },
+            config=config,
+        )
 
-        result = graph.invoke({
-            "messages": messages,
-        })
+        final_report = result.get("final_report")
 
-        research_brief = result.get("research_brief")
-
-        if research_brief:
-            print("\n研究简报：")
-            print(research_brief)
+        if final_report:
+            print("\n最终报告：")
+            print(final_report)
             return
 
-        messages = result["messages"]
-        clarification_question = messages[-1].content
+        messages = result.get("messages", [])
 
-        print("\n需要澄清：")
-        print(clarification_question)
+        if not messages:
+            raise RuntimeError(
+                "Full Agent did not return a clarification "
+                "message or final report."
+            )
+
+        print("\n需要补充信息：")
+        print(messages[-1].content)
+def main() -> None:
+    """Run the asynchronous CLI from a synchronous console entry point."""
+
+    asyncio.run(run_cli())
 
 
 if __name__ == "__main__":
