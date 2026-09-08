@@ -11,13 +11,19 @@ class StubGraph:
         self.inputs = []
         self.configs = []
 
-    async def ainvoke(self, graph_input, config=None):
+    async def astream(self, graph_input, config=None, **kwargs):
+        """Yield a top-level update for graph_input/config; kwargs are stream options."""
         self.inputs.append(graph_input)
         self.configs.append(config)
         result = self.results.pop(0)
         if callable(result):
-            return result(graph_input)
-        return result
+            result = result(graph_input)
+        self.state = result
+        yield (), "updates", {"final_report_generation": result}
+
+    async def aget_state(self, config):
+        """Return the last snapshot for the supplied session config."""
+        return SimpleNamespace(values=self.state)
 
 
 def install_application_stub(monkeypatch, graph):

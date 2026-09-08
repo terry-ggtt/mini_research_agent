@@ -2,11 +2,11 @@ import pytest
 from langchain_core.messages import HumanMessage
 from pydantic import ValidationError
 
-from mini_research_agent.scope_schemas import (
+from mini_research_agent.schemas.scope_models import (
     ClarificationDecision,
     ResearchBriefOutput,
 )
-from mini_research_agent.scope_graph import create_scope_graph
+from mini_research_agent.graphs.scope import create_scope_graph
 
 
 class StubModel:

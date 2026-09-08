@@ -1,4 +1,5 @@
 import asyncio
+from langgraph.config import get_stream_writer
 from typing_extensions import Literal
 from langchain_core.messages import BaseMessage, HumanMessage, SystemMessage, ToolMessage
 from langgraph.types import Command
@@ -176,7 +177,55 @@ def create_supervisor_graph(
         )
 
     async def supervisor_tools(state: SupervisorState)->Command[Literal["supervisor", "review_research"]]:
+        """Execute tools requested by state and return the next graph Command.
 
+        Emits task progress. Research failures propagate after cancelling and
+        awaiting sibling tasks, so unfinished work cannot leak into later turns.
+        """
+        emit = get_stream_writer()
+
+        async def run_research_task(tool_call):
+            """Run one ConductResearch tool_call and return its research result.
+
+            Emits start/completion/failure events keyed by the tool-call ID.
+            Exceptions and cancellation propagate to the supervising batch.
+            """
+            task_id = str(tool_call["id"])
+            topic = str(tool_call["args"]["research_topic"])
+            topic_preview = " ".join(topic.split())[:100]
+
+            emit({
+                "type": "progress",
+                "task_id": task_id,
+                "phase": "正在研究资料",
+                "message": f"开始研究：{topic_preview}",
+            })
+
+            try:
+                result = await researcher.ainvoke({
+                    "research_topic": topic,
+                })
+            except asyncio.CancelledError:
+                emit({
+                    "type": "progress",
+                    "task_id": task_id,
+                    "message": "研究已取消",
+                })
+                raise
+            except Exception as exc:
+                emit({
+                    "type": "progress",
+                    "task_id": task_id,
+                    "message": f"研究失败：{type(exc).__name__}",
+                })
+                raise
+
+            emit({
+                "type": "progress",
+                "task_id": task_id,
+                "message": "研究完成",
+            })
+            return result
         supervisor_messages = state.get("supervisor_messages", [])
         research_iterations = state.get("research_iterations", 0)
         most_recent_message = supervisor_messages[-1]
@@ -222,15 +271,17 @@ def create_supervisor_graph(
 
  
                 if conduct_research_calls:
-                    research_agent = researcher
-                    coros = [
-                            research_agent.ainvoke({
-                                "research_topic": tool_call["args"]["research_topic"]
-                            })for tool_call in conduct_research_calls
+                    tasks = [
+                        asyncio.create_task(run_research_task(tool_call))
+                        for tool_call in conduct_research_calls
                     ]
-                    responses = await asyncio.gather(
-                                        *coros,
-                                        )
+                    try:
+                        responses = await asyncio.gather(*tasks)
+                    finally:
+                        for task in tasks:
+                            if not task.done():
+                                task.cancel()
+                        await asyncio.gather(*tasks, return_exceptions=True)
 
                     research_tool_messages=[
                         ToolMessage(
@@ -277,6 +328,16 @@ def create_supervisor_graph(
     async def review_research(
         state: SupervisorState,
     ) -> Command[Literal["supervisor", "__end__"]]:
+        """Review findings in state and return a follow-up or termination Command.
+
+        Emits review/follow-up progress and preserves reviewer exceptions.
+        """
+        emit = get_stream_writer()
+        emit({
+            "type": "progress",
+            "phase": "正在检查研究证据",
+            "message": "开始检查证据是否充分",
+        })
         supervisor_messages = list(state.get("supervisor_messages", []))
         findings = get_notes_from_tool_calls(supervisor_messages)
         research_iterations = state.get("research_iterations", 0)
@@ -305,6 +366,11 @@ def create_supervisor_graph(
         )
 
         if can_continue:
+            emit({
+                "type": "progress",
+                "phase": "正在补充研究",
+                "message": "证据存在关键缺口，开始补充研究",
+            })
             return Command(
                 goto="supervisor",
                 update={

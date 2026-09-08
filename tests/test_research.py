@@ -2,7 +2,7 @@ import pytest
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
 from langchain_core.tools import tool
 
-from mini_research_agent.research_graph import create_research_graph
+from mini_research_agent.graphs.research import create_research_graph
 
 
 class StubRunnable:

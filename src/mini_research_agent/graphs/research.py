@@ -6,6 +6,7 @@ from mini_research_agent.prompts.research import research_agent_prompt, compress
 from langchain_core.messages import HumanMessage , SystemMessage , ToolMessage , filter_messages
 from typing_extensions import Literal
 from langgraph.graph import StateGraph ,START , END
+from langgraph.config import get_stream_writer
 def create_research_graph(
     *,
     model=None,
@@ -103,6 +104,12 @@ def create_research_graph(
     async def tool_node(
     state: ResearcherState,
 ) -> dict:
+        """Execute requested tools from state and return observations/budget updates.
+
+        Emits tool lifecycle progress. Tool exceptions remain ToolMessages so
+        the researcher can recover; cancellation propagates to the caller.
+        """
+        emit = get_stream_writer()
         tool_calls = state[
             "researcher_messages"
         ][-1].tool_calls
@@ -176,9 +183,17 @@ def create_research_graph(
             try:
                 tool = tools_by_name[tool_name]
 
+                emit({
+                    "type": "progress",
+                    "message": f"正在调用工具：{tool_name}",
+                })
                 observation = await tool.ainvoke(
                     tool_args
                 )
+                emit({
+                    "type": "progress",
+                    "message": f"工具已返回：{tool_name}",
+                })
 
                 if is_file_range_read:
                     remaining = max_file_characters - file_characters_read
@@ -199,6 +214,10 @@ def create_research_graph(
                     )
 
             except Exception as exc:
+                emit({
+                    "type": "progress",
+                    "message": f"工具调用异常：{tool_name}（{type(exc).__name__}）",
+                })
                 observation = (
                     f"Tool execution failed: "
                     f"{type(exc).__name__}: {exc}"

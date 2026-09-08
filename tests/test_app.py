@@ -1,7 +1,7 @@
 import pytest
 from langchain_core.messages import AIMessage, HumanMessage
 
-from mini_research_agent.app_graph import create_app_graph
+from mini_research_agent.graphs.app import create_app_graph
 
 
 class StubGraph:

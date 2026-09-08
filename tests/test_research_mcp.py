@@ -2,7 +2,7 @@ import pytest
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langchain_core.tools import tool
 
-import mini_research_agent.research_agent_mcp as mcp_module
+import mini_research_agent.graphs.mcp_research as mcp_module
 
 
 class StubMCPClient:

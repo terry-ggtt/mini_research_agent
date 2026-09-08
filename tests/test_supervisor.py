@@ -1,7 +1,7 @@
 import pytest
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 
-from mini_research_agent.multi_agent_supervisor_graph import (
+from mini_research_agent.graphs.supervisor import (
     create_supervisor_graph,
     get_notes_from_tool_calls,
 )

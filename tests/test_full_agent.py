@@ -2,7 +2,7 @@ import pytest
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain_core.runnables import RunnableLambda
 
-from mini_research_agent.full_agent import create_full_agent
+from mini_research_agent.graphs.full_agent import create_full_agent
 
 
 class StubWriter:
